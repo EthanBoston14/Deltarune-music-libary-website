@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DELTARUNE // MUSIC LIBRARY</title>
+
+    <link rel="icon" type="image/png" href="icon.png">
+
+    <style>
+        /* 1. LOCAL FONT LOADING - No more Google Errors */
+        @font-face {
+            font-family: 'Press Start 2P';
+            /* Make sure the filename below matches your GitHub file EXACTLY */
+            src: url('PressStart2P-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            cursor: none !important;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: url('animated_bg_long.gif') center / cover no-repeat fixed;
+            font-family: 'Press Start 2P', cursive, monospace;
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        /* Layout */
+        .app {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Left menu */
+        .library {
+            width: 360px;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(14px);
+            border-right: 1px solid rgba(255,255,255,0.08);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #e0e0e0;
+            font-family: inherit;
+            font-size: 8px;
+        }
+
+        /* Track list */
+        .track {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 6px;
+        }
+
+        .track:hover { background: rgba(255,255,255,0.1); }
+
+        .track.active {
+            background: rgba(255,255,255,0.16);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        /* Display */
+        .display {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .display img {
+            width: 320px;
+            height: 320px;
+            object-fit: contain;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
+        }
+
+        /* Custom cursor */
+        .cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            background: url('cursor.png') center / contain no-repeat;
+            pointer-events: none;
+            z-index: 2147483647;
+        }
+
+        /* Floating keyboard text */
+        .key {
+            position: fixed;
+            bottom: 40px;
+            font-size: 12px;
+            color: white;
+            pointer-events: none;
+            white-space: nowrap;
+            animation: floatUp 3s linear forwards;
+            text-shadow: 2px 2px #000;
+            /* Force the custom font here too */
+            font-family: 'Press Start 2P', cursive, monospace;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            60% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-160px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+    <div class="library">
+        <div class="title">DELTARUNE // MUSIC</div>
+        <input class="search" placeholder="SEARCH TRACK" oninput="filterTracks(this.value)">
+
+        <div class="track" data-src="music/findher.mp3" data-img="guitar.gif">
+            Dess findher.mp3
+        </div>
+
+        <div class="track" data-src="music/Beginning.wav" data-img="car.gif">
+            Beginning by Toby Fox
+        </div>
+<!-- Chapter 1 -->
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 01 ANOTHER HIM.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> ANOTHER HIM </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 03 School.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> School </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 04 Susie.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Susie </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 05 The Door.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> The Door </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 06 Cliffs.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Cliffs </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 07 The Chase.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> The Chase </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 08 The Legend.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> The Legend </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 09 Lancer.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Lancer </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 10 Rude Buster.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Rude Buster </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 11 Empty Town.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Empty Town </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 12 Weird Birds.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Weird Birds </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 13 Field of Hopes and Dreams.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Field of Hopes and Dreams </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 14 Fanfare (from Rose of Winter).wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Fanfare (from Rose of Winter) </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 15 Lantern.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Lantern </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 16 I'm Very Bad.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> I'm Very Bad </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 17 Checker Dance.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Checker Dance </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 18 Quiet Autumn.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Quiet Autumn </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 19 Scarlet Forest.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Scarlet Forest </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 20 Thrash Machine.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Thrash Machine </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 21 Vs. Lancer.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Vs. Lancer </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 22 Basement.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Basement </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 23 Imminent Death.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Imminent Death </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 24 Vs. Susie.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Vs. Susie </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 25 Card Castle.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Card Castle </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 26 Rouxls Kaard.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Rouxls Kaard </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 27 April 2012.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> April 2012 </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 28 Hip Shop.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Hip Shop </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 29 Gallery.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Gallery </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 30 Chaos King.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Chaos King </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 31 Darkness Falls.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Darkness Falls </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 32 The Circus.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> The Circus </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 33 THE WORLD REVOLVING.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> THE WORLD REVOLVING </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 34 Friendship.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Friendship </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 35 THE HOLY.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> THE HOLY </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 36 Your Power.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Your Power </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 37 A Town Called Hometown.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> A Town Called Hometown </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 38 You Can Always Come Home.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> You Can Always Come Home </div>
+<div class="track" data-src="music/Don'tForget.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Don't Forget </div>
+<div class="track" data-src="music/Toby Fox - DELTARUNE Chapter 1 OST - 40 Before the Story.wav" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbffmmSBwRswsyPg13nNq2gu3nCZgJ8XQSw&s"> Before the Story </div>
+
+<!-- Chapter 2 -->
+<div class="track" data-src="music/queen_intro.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Ohhhhohohoho! </div>
+<div class="track" data-src="music/cyber_battle_prelude.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Almost to the Guys! </div>
+<div class="track" data-src="music/music_guys_intro.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Cool Beat </div>
+<div class="track" data-src="music/music_guys.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> When I Get Mad I Dance Like This </div>
+<div class="track" data-src="music/cyber_battle.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Cyber Battle (Solo) </div>
+<div class="track" data-src="music/cyber_battle_end.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> When I Get Happy I Dance Like This </div>
+<div class="track" data-src="music/berdly_theme.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Berdly </div>
+<div class="track" data-src="music/berdly_chase.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Smart Race </div>
+<div class="track" data-src="music/queen_car_radio.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Cool Mixtape </div>
+<div class="track" data-src="music/spamton_meeting_intro.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> HEY EVERY ! </div>
+<div class="track" data-src="music/berdly_flashback.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Bluebird of Misfortune </div>
+<div class="track" data-src="music/KEYGEN.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> KEYGEN </div>
+<div class="track" data-src="music/acid_tunnel.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Acid Tunnel of Love </div>
+<div class="track" data-src="music/gigaqueen_pre.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Powers Combined </div>
+<div class="track" data-src="music/the_dark_truth.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> The Dark Truth </div>
+<div class="track" data-src="music/spamton_basement.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Digital Roots </div>
+<div class="track" data-src="music/spamton_neo_meeting.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Deal Gone Wrong </div>
+<div class="track" data-src="music/spamton_neo_mix_ex_wip.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> BIG SHOT </div>
+<div class="track" data-src="music/spamton_happy.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> A Real Boy! </div>
+<div class="track" data-src="music/napsta_alarm.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Chill Jailbreak Alarm </div>
+<div class="track" data-src="music/AUDIO_DEFEAT.ogg" data-img="https://static.wikia.nocookie.net/deltarune/images/9/96/DELTARUNE_Chapter_2_OST.jpg/revision/latest?cb=20210918192557"> Faint Courage </div>   </div>
+
+    <div class="display">
+        <img id="art" src="">
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+</div>
+
+<audio id="player" autoplay loop></audio>
+
+<script>
+/* ===== AUDIO + IMAGE ===== */
+const player = document.getElementById("player");
+const art = document.getElementById("art");
+const tracks = document.querySelectorAll(".track");
+
+function playTrack(el) {
+    tracks.forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+
+    player.src = el.dataset.src;
+    player.play().catch(() => {}); 
+
+    art.src = el.dataset.img;
+}
+
+tracks.forEach(track => {
+    track.addEventListener("click", () => playTrack(track));
+});
+
+window.addEventListener("load", () => {
+    if (tracks[0]) playTrack(tracks[0]);
+});
+
+/* ===== SEARCH ===== */
+function filterTracks(query) {
+    query = query.toLowerCase();
+    tracks.forEach(t => {
+        t.style.display = t.textContent.toLowerCase().includes(query)
+            ? "block"
+            : "none";
+    });
+}
+
+/* ===== CUSTOM CURSOR ===== */
+const cursor = document.getElementById("cursor");
+document.addEventListener("mousemove", e => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+});
+
+/* ===== FLOATING KEYS (FIXED POSITION & RESET) ===== */
+let keyIndex = 0;
+let resetTimer = null;
+
+document.addEventListener("keydown", e => {
+    // 1. Reset typing position after 5 seconds of silence
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(() => {
+        keyIndex = 0; 
+    }, 5000);
+
+    // 2. Stop popups if you are typing in the search box
+    if (document.activeElement.tagName === 'INPUT') return;
+
+    const key = document.createElement("div");
+    key.className = "key";
+    
+    // Skip system keys (Shift, Ctrl, etc.)
+    if (e.key.length > 1 && e.key !== " ") return;
+
+    key.textContent = e.key === " " ? "SPACE" : e.key.toUpperCase();
+
+    // 3. Positioning and Screen Wrap logic
+    const spacing = 25; 
+    const startX = 400; // Starts to the right of the menu
+    let currentX = startX + (keyIndex * spacing);
+
+    // If text hits the right edge, wrap back to startX
+    if (currentX > window.innerWidth - 100) {
+        keyIndex = 0;
+        currentX = startX;
+    }
+
+    key.style.left = currentX + "px";
+
+    keyIndex++;
+    document.body.appendChild(key);
+
+    // Fade/Remove after animation
+    setTimeout(() => key.remove(), 3000);
+});
+</script>
+
+</body>
+</html>
