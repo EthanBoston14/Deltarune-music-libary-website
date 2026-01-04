@@ -5,7 +5,7 @@ Deltarune music libary website to be updated with more songs currently has 60? s
 https://ethanboston14.github.io/Deltarune-music-libary-website/
 
 
-<img width="1911" height="866" alt="image" src="https://github.com/user-attachments/assets/ceec3ab7-5d78-4328-9096-dda3e2abc387" />
+<img width="1919" height="863" alt="image" src="https://github.com/user-attachments/assets/bec02a44-ac55-4d73-bba3-27af14f0eaf3" />
 
 
 also if you press letters it will show pressed letters
