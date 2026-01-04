@@ -1,5 +1,5 @@
 # Deltarune-music-libary-website
-Deltarune music libary website to be updated with more songs features etc possibly gonna add a mini game or two currently none
+Deltarune music libary website to be updated with more songs currently has 60? songs now
 
 
 https://ethanboston14.github.io/Deltarune-music-libary-website/
